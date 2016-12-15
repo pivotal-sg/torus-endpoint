@@ -24,11 +24,13 @@ public class HighScoreController {
     }
 
 
+    @CrossOrigin
     @GetMapping("/highscores")
     public List<HighScore> highScores() {
         return highScoreService.sortScores(highScoreRepository.findAll());
     }
 
+    @CrossOrigin
     @PostMapping("/highscores")
     @ResponseStatus(HttpStatus.CREATED)
     public HighScore submitHighScore(@RequestBody HighScore score) {

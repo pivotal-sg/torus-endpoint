@@ -14,6 +14,9 @@ public class HighScore implements Comparable<HighScore> {
     String name;
     int score;
 
+    public HighScore() {
+    }
+
     public HighScore(String name, int score) {
         this.name = name;
         this.score = score;

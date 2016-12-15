@@ -4,9 +4,8 @@ import io.pivotal.torus.data.HighScore;
 import io.pivotal.torus.repository.HighScoreRepository;
 import io.pivotal.torus.service.HighScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -28,5 +27,11 @@ public class HighScoreController {
     @GetMapping("/highscores")
     public List<HighScore> highScores() {
         return highScoreService.sortScores(highScoreRepository.findAll());
+    }
+
+    @PostMapping("/highscores")
+    @ResponseStatus(HttpStatus.CREATED)
+    public HighScore submitHighScore(@RequestBody HighScore score) {
+        return highScoreRepository.save(score);
     }
 }

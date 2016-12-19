@@ -13,9 +13,10 @@ import java.util.*;
 @RequestMapping("/torus")
 public class HighScoreController {
 
+    private
     HighScoreRepository highScoreRepository;
 
-    HighScoreService highScoreService;
+    private HighScoreService highScoreService;
 
     @Autowired
     public HighScoreController(HighScoreRepository highScoreRepository) {

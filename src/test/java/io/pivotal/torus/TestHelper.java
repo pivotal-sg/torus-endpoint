@@ -9,15 +9,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TestHelper {
+class TestHelper {
 
-    public static List<HighScore> createHighScores(Integer... scoreValues) {
+    static List<HighScore> createHighScores(Integer... scoreValues) {
         return Arrays.stream(scoreValues).
-                map(value -> new HighScore("default", value)).
+                map(value -> new HighScore(String.valueOf(value), value)).
                 collect(Collectors.toList());
     }
 
-    public static String json(Object o) throws IOException {
+    static String json(Object o) throws IOException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         return ow.writeValueAsString(o);
     }

@@ -24,11 +24,10 @@ public class HighScoreController {
         this.highScoreService = new HighScoreService();
     }
 
-
     @CrossOrigin
     @GetMapping("/highscores")
     public List<HighScore> highScores() {
-        return highScoreService.sortScores(highScoreRepository.findAll());
+        return highScoreService.mergeScores(highScoreRepository.findAll());
     }
 
     @CrossOrigin

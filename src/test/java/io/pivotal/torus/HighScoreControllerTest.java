@@ -1,6 +1,8 @@
 package io.pivotal.torus;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import io.pivotal.torus.data.HighScore;
 import io.pivotal.torus.repository.HighScoreRepository;
 import io.pivotal.torus.web.HighScoreController;
@@ -35,14 +37,15 @@ public class HighScoreControllerTest {
     }
 
     @Test
-    public void testGetHighscores() throws Exception {
-        ObjectMapper jsonOM = new ObjectMapper();
+    public void testGetHighScores() throws Exception {
+        ObjectMapper om = new ObjectMapper();
 
         MvcResult mvcResult = mockMvc.perform(get("/torus/highscores")).
                 andExpect(status().isOk()).andReturn();
 
-        assertEquals(jsonOM.writeValueAsString(TestHelper.createHighScores(20, 10, 1)),
-                mvcResult.getResponse().getContentAsString());
+        JsonNode jsonNode = om.readTree(mvcResult.getResponse().getContentAsByteArray());
+
+        assertEquals(10, jsonNode.size());
     }
 
     @Test
